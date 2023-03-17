@@ -3,11 +3,7 @@ const express = require("express");
 const apiRoute = require("./route/apiRoute");
 const app = express();
 const cors = require("cors");
-app.use(
-  cors({
-    origin: "http://localhost:3000",
-  })
-);
+app.use(cors());
 app.use(express.json());
 
 app.listen(5000, () => {
