@@ -3,12 +3,14 @@ const express = require("express");
 const apiRoute = require("./route/apiRoute");
 const app = express();
 const cors = require("cors");
+const dotenv = require("dotenv");
+dotenv.config({ path: "./config.env" });
 const globalErrorHandler = require("./errorController");
 const AppError = require("./utils/appError");
 app.use(cors());
 app.use(express.json());
 
-app.listen(5000, () => {
+app.listen(process.env.PORT || 5000, () => {
   console.log(`Server is Working on  http://localhost:${5000}`);
 });
 app.use("/api", apiRoute);
