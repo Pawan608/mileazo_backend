@@ -3,6 +3,8 @@ const express = require("express");
 const apiRoute = require("./route/apiRoute");
 const app = express();
 const cors = require("cors");
+const globalErrorHandler = require("./errorController");
+const AppError = require("./utils/appError");
 app.use(cors());
 app.use(express.json());
 
@@ -10,3 +12,8 @@ app.listen(5000, () => {
   console.log(`Server is Working on  http://localhost:${5000}`);
 });
 app.use("/api", apiRoute);
+app.all("*", (req, res, next) => {
+  next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
+});
+app.use(globalErrorHandler);
+module.exports = app;
